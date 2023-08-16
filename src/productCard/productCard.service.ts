@@ -251,40 +251,49 @@ export class ProductCardService {
     color?: string,
     size?: string,
   ) {
-
     let query = this.productCardRepository.find({
       published: true,
-      // 'pricesAndQuantity.quantity': { $gt: 0 }
+      typeQuantity: { $elemMatch: { quantity: { $gt: 0 } } }, // Добавленное условие
     });
+  
     if (category && category.trim() !== '') {
       query = query.or([
         { 'categories.category.id': category },
         { 'categories.subcategory.id': category },
-        { 'categories.section.id': category }
+        { 'categories.section.id': category },
       ]);
     }
-
+  
     if (minPrice !== undefined && minPrice !== null) {
       query = query.find({ 'pricesAndQuantity.price': { $gte: minPrice } });
     }
-
+  
     if (maxPrice !== undefined && maxPrice !== null) {
       query = query.find({ 'pricesAndQuantity.price': { $lte: maxPrice } });
     }
-
+  
     if (color && color.trim() !== '') {
       query = query.find({ colors: color });
     }
-
+  
     if (size && size.trim() !== '') {
-      query = query.find({ 'typeQuantity.size': size });
+      query = query.find({
+        'typeQuantity': {
+          $elemMatch: {
+            size: size,
+            quantity: { $gt: 0 },
+          },
+        },
+      });
     }
-
+  
     return query
       .skip((page - 1) * limit)
       .limit(limit)
       .exec();
   }
+  
+  
 
 
   async searchProductCards(
