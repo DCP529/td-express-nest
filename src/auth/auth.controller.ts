@@ -67,4 +67,10 @@ export class AuthController {
   //     {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true, secure: Boolean(process.env.HTTPS_BOOLEAN)})
   //   return response.json(userData)
   // }
+
+  // Проверка на существование
+  @Post('check-user')
+  async checkShelterTelegram(@Body() dto: EnterUserDto) {
+    return await this.authService.addTelegramShelter(dto);
+  }
 }

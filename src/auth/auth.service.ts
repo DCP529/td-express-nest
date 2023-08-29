@@ -83,5 +83,11 @@ export class AuthService {
     const payload = { sub: user.id, email: user.email, user: 'user' };
     return this.jwtService.signAsync(payload);
   }
+
+  async addTelegramShelter(dto: EnterUserDto) {
+    const validationUser = await this.validateUser(dto)
+
+    return await this.userService.addTelegramPush(validationUser, dto.chatId)
+  }
 }
 

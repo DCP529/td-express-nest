@@ -43,10 +43,10 @@ export const InformationSchema = SchemaFactory.createForClass(Information);
 
 @Schema()
 export class AdditionalInformation extends Document {
-  @Prop({ required: true })
+  @Prop({ default: '' })
   material: string;
 
-  @Prop({ required: true })
+  @Prop({ default: '' })
   recommendations: string;
 }
 

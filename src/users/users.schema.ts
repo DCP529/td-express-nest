@@ -1,4 +1,4 @@
-import mongoose, { HydratedDocument } from "mongoose";
+import { Document, HydratedDocument } from "mongoose";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Order, OrderSchema } from "src/order/order.schema";
 
@@ -6,7 +6,7 @@ import { Order, OrderSchema } from "src/order/order.schema";
 export type UserDocument = HydratedDocument<User>
 
 @Schema({timestamps: true})
-export class User {
+export class User extends Document {
   @Prop({required: true})
   firstName: string
 
@@ -30,6 +30,9 @@ export class User {
 
   @Prop({ required: true, enum: ['USER', 'ADMIN'], default: 'USER' })
   role: string;
+
+  @Prop({default: null})
+  isPushTelegram: string | null
 }
 
 export const UserSchema = SchemaFactory.createForClass(User)

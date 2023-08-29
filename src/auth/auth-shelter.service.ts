@@ -75,5 +75,11 @@ export class AuthShelterService {
   async getUserById(id: string) {
     return await this.shelterService.findById(id);
   }
+
+  async addTelegramShelter(dto: EnterUserDto) {
+    const validationShelter = await this.validateShelter(dto)
+
+    return await this.shelterService.addTelegramPush(validationShelter, dto.chatId)
+  }
 }
 

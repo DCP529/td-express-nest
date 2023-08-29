@@ -35,7 +35,7 @@ export class CategoriesController {
   //   return this.categoriesService.subtoSec(dtoCat)
   // }
 
-  @Get(':id')
+  @Get('/category/:id')
   async getCategory(@Param('id') id: string) {
     return await this.categoriesService.getCategory(id)
   }

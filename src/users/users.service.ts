@@ -232,4 +232,18 @@ export class UsersService {
   async setCountCart(userId: string, typeId: string, count: number) {
     await this.cartService.setCountCart(userId, typeId, count)
   }
+
+  async addTelegramPush(user: User, chatId: string) {
+    try {
+      user.isPushTelegram = chatId
+      await user.save()
+      return true
+    } catch (e) {
+      throw new HttpException(
+        'Не удается подключить уведомления: ' + e.message,
+        HttpStatus.BAD_REQUEST
+      )
+    }
+
+  }
 }

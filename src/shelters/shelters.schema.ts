@@ -132,6 +132,9 @@ export class Shelter extends Document {
 
   @Prop({required: true, type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Notification" }]})
   notifications: Notification[]
+
+  @Prop({default: null})
+  isPushTelegram: string | null
 }
 
 export const ShelterSchema = SchemaFactory.createForClass(Shelter)

@@ -7,6 +7,7 @@ import { BanUserDto } from "src/users/dto/ban-user.dto";
 import { ProductCardService } from "src/productCard/productCard.service";
 import {SheltersService} from "../shelters/shelters.service";
 import {NotificationService} from "../notification/notification.service";
+// import fetch from 'node-fetch';
 
 @ApiTags('Админ')
 @Controller('admin')
@@ -118,4 +119,26 @@ export class AdminController {
     return this.productCardService.rejectGood(id)
   }
 
+  // @ApiOperation({ summary: 'Отклонить товар' })
+  // @ApiResponse({ status: 200 })
+  // @Roles('ADMIN')
+  // @Get('/check-telegram')
+  // async checkTelegram() {
+  //   const apiUrl = `https://api.telegram.org/bot${process.env.TELEGRAM_BOT}/sendMessage`;
+  //   const payload = {
+  //     chat_id: 5649067326,
+  //     text: 'Ваш товар <b>“Туфли лоферы”</b> успешно прошел проверку и выпущен в продажу.',
+  //     parse_mode: 'HTML',
+  //   };
+  //   try {
+  //     await fetch(apiUrl, {
+  //       method: 'POST',
+  //       body: JSON.stringify(payload),
+  //       headers: { 'Content-Type': 'application/json' },
+  //     });
+  //     return true
+  //   } catch (error) {
+  //     console.error('Error sending message to Telegram:', error);
+  //   }
+  // }
 }

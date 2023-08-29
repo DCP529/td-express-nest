@@ -96,6 +96,12 @@ export class AuthShelterController {
   async createNewPassword(@Body() passwordDto: NewPasswordDto) {
     return await this.authService.createNewPassword(passwordDto)
   }
+
+  // Проверка на существование
+  @Post('check-shelter')
+  async checkShelterTelegram(@Body() dto: EnterUserDto) {
+    return await this.authService.addTelegramShelter(dto);
+  }
 }
 
 
